@@ -1,4 +1,10 @@
 #!/usr/bin/env python3
+
+"""very simple, quick and dirty kicad PCB files parser
+   it does some DOM-style hackery to make it fit into dicts
+   and lists and be parseable with glom.
+   Aris Adamantiadis 2023"""
+
 import sys
 from pprint import pp
 from collections import defaultdict
@@ -105,7 +111,8 @@ def parse(filename):
 
 def main(args):
     p=parse(args[0])
-    print(glom.glom(p, "kicad_pcb.general.drawings"))
+    print("List of components in pcb:")
+    print(glom.glom(p, ("kicad_pcb.module", ["name"])))
     #pp(p)
 
 if __name__=="__main__":
